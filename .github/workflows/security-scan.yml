@@ -41,6 +41,6 @@ jobs:
           tool-version: "3.7.0"   # purely cosmetic metadata
 
       - name: Upload SARIF to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: safety-results.sarif
