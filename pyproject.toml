@@ -4,7 +4,11 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "auth>=1.2.1",
+    "login>=0.0.6",
+    "safety>=3.7.0",
+]
 
 [dependency-groups]
 dev = [
