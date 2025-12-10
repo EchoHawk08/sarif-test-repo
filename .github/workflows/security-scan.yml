@@ -1,0 +1,51 @@
+name: Safety Scan
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies for demo app
+        working-directory: vulnerable-app
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Safety CLI
+        run: |
+          python -m pip install safety
+
+      - name: Run Safety scan (JSON output)
+        run: |
+          # Safety scans the current environment and/or project files.
+          # We'll run it at repo root so it sees installed packages.
+          safety scan --full-report --json > safety.json
+
+      - name: Convert Safety JSON to SARIF
+        uses: kramandr/safety-sarif-action@v1
+        with:
+          input-file: safety.json
+          output-file: safety-results.sarif
+          tool-version: "3.x"    # optional, cosmetic
+
+      - name: Upload SARIF to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: safety-results.sarif
+
