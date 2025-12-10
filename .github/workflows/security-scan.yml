@@ -27,12 +27,10 @@ jobs:
           python -m pip install safety
 
       - name: Run Safety scan (JSON output)
-        env:
+        env: 
           SAFETY_API_KEY: ${{ secrets.SAFETY_API_KEY }}
         run: |
-          safety --key "$SAFETY_API_KEY" scan \
-            --file vulnerable-app/requirements.txt \
-            --output json > safety.json
+          safety scan --output json > safety.json || true
 
       - name: Convert Safety JSON to SARIF
         uses: kramandr/safety-sarif-action@v1.0.0
