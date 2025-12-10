@@ -38,7 +38,7 @@ jobs:
           safety scan --full-report --json > safety.json
 
       - name: Convert Safety JSON to SARIF
-        uses: kramandr/safety-sarif-action@v1
+        uses: kramandr/safety-sarif-action@v1.0.0
         with:
           input-file: safety.json
           output-file: safety-results.sarif
