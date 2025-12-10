@@ -7,10 +7,19 @@ This repository demonstrates generating and uploading SARIF results from Safety 
 - `vulnerable-app/app.py`: Tiny demo that prints versions of intentionally outdated libs.
 - `vulnerable-app/requirements.txt`: The vulnerable dependency list used for scanning.
 - `.github/workflows/security-scan.yml`: GitHub Actions workflow that runs Safety, converts results to SARIF via an action, and uploads to code scanning.
-- `safety.json` and `safety-results.sarif`: Sample outputs from the latest scan (JSON and SARIF artifacts you can inspect or re-upload).
-- `screenshots/placeholder.png`: Placeholder for screenshots showing the integration working (e.g., GitHub code scanning alerts).
+- `screenshots/`: Screenshots for how the SARIF workflow integrates with GitHub.
 
-## Intentional Vulnerabilities (educational only)
+## Action Repository
+
+This SARIF conversion workflow relies on a custom GitHub Action for transforming Safety JSON output into SARIF format.  
+You can find the full source code and documentation for the action here:
+
+**Safety SARIF Action:**  
+https://github.com/kramandr/safety-sarif-action
+
+Use this link to review the converter logic, report issues, or contribute improvements.
+
+## Intentional Vulnerabilities
 
 The demo app pins old versions to guarantee findings:
 
